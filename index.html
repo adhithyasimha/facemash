@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <link rel="stylesheet" href="style.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facemash</title>
+</head>
+<body>
+<div class="top">
+    <h1>FACEMASH
+    </h1>
+</div>  
+<p>
+    <b>
+    Were we let in for our looks ?No. Will we be judged on them ? Yes.
+    </b>
+</p> 
+<h1>Who's Beautiful? Click to Choose.</h1>
+<div class="img_container">
+<img src="./photos/img1.jpg" class="img" onclick="changeImage(this)">
+<p style="margin-top: -14%;margin-left: -7%;">OR</p>
+<img src="./photos/img2.jpg" class="img1"onclick="changeImage(this)">
+
+</div>
+<script>
+function changeImage(clickedImg) {
+    const nonClickedClass = clickedImg.className === 'img' ? 'img1' : 'img';
+    const nonClickedImg = document.querySelector('.' + nonClickedClass);
+    let newImagePath = generateUniqueImagePath(nonClickedClass);
+    nonClickedImg.src = newImagePath;
+}
+
+function generateUniqueImagePath(className) {
+
+    const currentNumber = parseInt(document.querySelector('.' + className).src.match(/img(\d+)\.jpg/)[1]);
+    let nextNumber = currentNumber + 1;
+    const oppositeClass = className === 'img' ? 'img1' : 'img';
+    const oppositeSrc = document.querySelector('.' + oppositeClass).src;
+    const oppositeNumber = parseInt(oppositeSrc.match(/img(\d+)\.jpg/)[1]);
+    if (nextNumber === oppositeNumber) {
+        
+        nextNumber++;
+    }
+
+    return `./photos/img${nextNumber}.jpg`;
+}
+</script>
+</body>
+</html>
